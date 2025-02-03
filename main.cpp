@@ -253,7 +253,7 @@ user readnewuser() {
 }
 
 void addnewuser() {
-    user u = readnewuser(); // Read new client details
+    user u = readnewuser(); // Read new user details
     AddDataLineToFile(UsersFileName, ConvertuserRecordToLine(u)); // Write to file
 }
 
@@ -355,7 +355,7 @@ void saveuserChanges(const user& userr) {
             u = userr; // Update the client's data
             break;
         }}
-    SaveuserDataToFile(UsersFileName, users); // Save the updated client list back to the file
+    SaveuserDataToFile(UsersFileName, users); // Save the updated user list back to the file
 }
 
 bool markclientfordelete(string AccountNumber) {  //
@@ -413,7 +413,7 @@ bool DeleteClientByAccountNumber(const string& AccountNumber, vector<sClient>& v
 bool Deleteuserbyusername(const string& username, vector<user>&users) {
     user u;
     char Answer = 'n';
-    // Find the client by account number
+    
     if (finduserbyusername(username , u)) {
         if(u.username=="admin"){
             cout<<"you cannot delete the admin";
@@ -426,8 +426,8 @@ bool Deleteuserbyusername(const string& username, vector<user>&users) {
 
         // Check for confirmation
         if (tolower(Answer) == 'y') {
-            if (markuserfordelete(username)) { // Mark client for deletion
-                // Refresh clients data from the file
+            if (markuserfordelete(username)) { // Mark user for deletion
+                // Refresh user data from the file
                 users = LoadusersDataFromFile(UsersFileName);
                 cout << "\n\nuser deleted successfully.";
             return true;
@@ -511,7 +511,7 @@ user updateuserinfo(user u, vector<user>& users){
     //AddDataLineToFile(ClientsFileName,ConvertRecordToLine(client));
     for (user& uu : users) {
         if (uu.username == u.username) {
-            uu = u;  // Update the existing client in the vector
+            uu = u;  // Update the existing user in the vector
             break;
         }
     }
